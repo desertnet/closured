@@ -1,0 +1,30 @@
+{
+  "name": "closured",
+  "version": "0.0.0",
+  "description": "Run Google Closure Compiler from Node",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/limulus/closured.git"
+  },
+  "keywords": [
+    "closure",
+    "compiler",
+    "minification",
+    "minifier"
+  ],
+  "author": "Eric McCarthy <eric@limulus.net>",
+  "license": "Apache v2",
+  "bugs": {
+    "url": "https://github.com/limulus/closured/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.1"
+  }
+}
