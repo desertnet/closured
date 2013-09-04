@@ -9,18 +9,16 @@ beforeEach(function () {
     compiler = new closured.Compiler()
 })
 
-function runClosureCommandLineMockSuccess (args, cb) {
-    setImmediate(cb(null))
-}
-
 describe("#compile", function () {
     var runner
     beforeEach(function () {
-        runner = sinon.spy(runClosureCommandLineMockSuccess)
+        runner = sinon.expectation.create("closureCommandLineRunner")
+        runner.callsArgWithAsync(1, null)  // Call the callback with null
         compiler.setClosureCommandLineRunner(runner)
     })
 
     it("should call the provided runClosureCommandLine function", function (done) {
+        runner.once()
         compiler.compile(null, done)
     })
 })
