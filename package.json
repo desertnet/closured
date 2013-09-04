@@ -25,6 +25,7 @@
     "url": "https://github.com/limulus/closured/issues"
   },
   "devDependencies": {
-    "mocha": "~1.12.1"
+    "mocha": "~1.12.1",
+    "sinon": "~1.7.3"
   }
 }
