@@ -10,9 +10,14 @@ Compiler.prototype.setClosureSpawner = function (spawner) {
 
 Compiler.prototype.compile = function (job, cb) {
     var proc = this._closureSpawner.call(global, job.compilerArguments())
+    
     proc.once("exit", function (codeOrSig) {
         if (codeOrSig === 0) {
             return cb(null)
         }
+    }.bind(this))
+
+    proc.once("error", function (err) {
+        return cb(err)
     }.bind(this))
 }

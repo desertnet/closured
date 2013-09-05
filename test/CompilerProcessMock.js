@@ -20,3 +20,12 @@ CompilerProcessMock.prototype.emulateSuccess = function () {
         this.emit("exit", 0)
     }.bind(this))
 }
+
+CompilerProcessMock.prototype.emulateSpawnError = function () {
+    setImmediate(function () {
+        var err = new Error("spawn ENOENT")
+        err.code = err.errno = "ENOENT"
+        err.syscall = "spawn"
+        this.emit("error", err)
+    }.bind(this))
+}
