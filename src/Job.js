@@ -7,6 +7,13 @@ var Job = module.exports = function () {
     this._outputFile = null
 }
 
+Job.prototype.compilerArguments = function () {
+    return [
+        this.sourceFilesArgs()
+      , this.outputFileArgs()
+    ].reduce(function (left, right) { return left.concat(right) })
+}
+
 Job.prototype.addSourceFile = function (file) {
     this._sourceFiles.push(path.resolve(file))
 }
