@@ -9,5 +9,5 @@ Compiler.prototype.setClosureCommandLineRunner = function (runner) {
 }
 
 Compiler.prototype.compile = function (job, cb) {
-    this._closureCommandLineRunner.call(global, [], cb)
+    this._closureCommandLineRunner.call(global, job.compilerArguments(), cb)
 }

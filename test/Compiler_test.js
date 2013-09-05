@@ -1,16 +1,18 @@
 "use strict"
 
-var closured = require("../index.js")
+var Compiler = require("../src/Compiler.js")
+  , Job = require("../src/Job.js")
   , sinon = require("sinon")
   , assert = require("assert")
+  , path = require("path")
 
 describe("Compiler", function () {
     var compiler
     beforeEach(function () {
-        compiler = new closured.Compiler()
+        compiler = new Compiler()
     })
 
-    describe("#compile", function () {
+    describe("-compile", function () {
         var runner
         beforeEach(function () {
             runner = sinon.expectation.create("closureCommandLineRunner")
@@ -18,9 +20,14 @@ describe("Compiler", function () {
             compiler.setClosureCommandLineRunner(runner)
         })
 
-        it("should call the provided runClosureCommandLine function", function (done) {
-            runner.once()
-            compiler.compile(null, done)
+        it("should call runClosureCommandLine function", function (done) {
+            var job = new Job()
+            job.addSourceFile("foo.js")
+            job.setOutputFile("baz.js")
+
+            runner.once().withArgs(job.compilerArguments())
+
+            compiler.compile(job, done)
         })
     })
 })
