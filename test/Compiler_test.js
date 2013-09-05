@@ -2,6 +2,7 @@
 
 var Compiler = require("../src/Compiler.js")
   , Job = require("../src/Job.js")
+  , CompilerProcessMock = require("./CompilerProcessMock.js")
   , sinon = require("sinon")
   , assert = require("assert")
   , path = require("path")
@@ -13,10 +14,10 @@ describe("Compiler", function () {
     })
 
     describe("-compile", function () {
-        var runner
+        var runner, proc
         beforeEach(function () {
-            runner = sinon.expectation.create("closureCommandLineRunner")
-            runner.callsArgWithAsync(1, null)  // Call the callback with null
+            proc = new CompilerProcessMock()
+            runner = sinon.expectation.create("closureCommandLineRunner").returns(proc)
             compiler.setClosureCommandLineRunner(runner)
         })
 
@@ -27,8 +28,12 @@ describe("Compiler", function () {
 
             runner.once().withArgs(job.compilerArguments())
 
-            compiler.compile(job, done)
+            compiler.compile(job, function () {
+                runner.verify()
+                done()
+            })
+
+            proc.emulateSuccess()
         })
     })
 })
-
