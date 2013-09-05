@@ -1,7 +1,10 @@
 "use strict"
 
+var path = require("path")
+  , spawn = require("child_process").spawn
+
 var Compiler = module.exports = function () {
-    this._closureSpawner = null
+    this._closureSpawner = _basicClosureSpawner
 }
 
 Compiler.prototype.setClosureSpawner = function (spawner) {
@@ -20,4 +23,10 @@ Compiler.prototype.compile = function (job, cb) {
     proc.once("error", function (err) {
         return cb(err)
     }.bind(this))
+}
+
+function _basicClosureSpawner (args) {
+    var jarfile = path.resolve(__dirname + "/../support/compiler.jar")
+    var javaArgs = ["-jar", jarfile].concat(args)
+    return spawn("java", javaArgs)
 }
