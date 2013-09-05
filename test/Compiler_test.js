@@ -14,22 +14,22 @@ describe("Compiler", function () {
     })
 
     describe("-compile", function () {
-        var runner, proc
+        var spawner, proc
         beforeEach(function () {
             proc = new CompilerProcessMock()
-            runner = sinon.expectation.create("closureCommandLineRunner").returns(proc)
-            compiler.setClosureCommandLineRunner(runner)
+            spawner = sinon.expectation.create("closureSpawner").returns(proc)
+            compiler.setClosureSpawner(spawner)
         })
 
-        it("should call runClosureCommandLine function", function (done) {
+        it("should call the closure spawner function", function (done) {
             var job = new Job()
             job.addSourceFile("foo.js")
             job.setOutputFile("baz.js")
 
-            runner.once().withArgs(job.compilerArguments())
+            spawner.once().withArgs(job.compilerArguments())
 
             compiler.compile(job, function () {
-                runner.verify()
+                spawner.verify()
                 done()
             })
 
