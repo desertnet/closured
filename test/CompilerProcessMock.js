@@ -21,6 +21,12 @@ require("setimmediate")  // setImmediate shim for Node 0.8
 var EventEmitter = require("events").EventEmitter
   , inherits = require("util").inherits
 
+
+/**
+ * Emulates a compiler child process.
+ * @constructor
+ * @inherits {EventEmitter}
+ */
 var CompilerProcessMock = module.exports = function () {
     EventEmitter.call(this)
     this.stdout = new EventEmitter()
@@ -29,6 +35,9 @@ var CompilerProcessMock = module.exports = function () {
 }
 inherits(CompilerProcessMock, EventEmitter)
 
+/** 
+ * Emulate a successful compilation.
+ */
 CompilerProcessMock.prototype.emulateSuccess = function () {
     setImmediate(function () {
         this.emit("close")
@@ -39,6 +48,10 @@ CompilerProcessMock.prototype.emulateSuccess = function () {
     }.bind(this))
 }
 
+
+/**
+ * Emulate an error launching the process.
+ */
 CompilerProcessMock.prototype.emulateSpawnError = function () {
     setImmediate(function () {
         var err = new Error("spawn ENOENT")

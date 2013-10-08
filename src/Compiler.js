@@ -19,14 +19,28 @@
 var path = require("path")
   , spawn = require("child_process").spawn
 
+/**
+ * Takes Job objects and invokes the compiler on them.
+ * @constructor
+ */
 var Compiler = module.exports = function () {
     this._closureSpawner = _basicClosureSpawner
 }
 
+/**
+ * Sets the function used to spawn the compiler command with the given
+ * arguments. It should return a ChildProcess-like object.
+ * @param {function(Array.<string>):ChildProcess} spawner Function that spawns the compiler process.
+ */
 Compiler.prototype.setClosureSpawner = function (spawner) {
     this._closureSpawner = spawner
 }
 
+/**
+ * Perform the compilation job and call the callback when complete.
+ * @param {Job} job
+ * @param {function(Error?)} cb
+ */
 Compiler.prototype.compile = function (job, cb) {
     var proc = this._closureSpawner.call(global, job.compilerArguments())
     
@@ -41,6 +55,10 @@ Compiler.prototype.compile = function (job, cb) {
     }.bind(this))
 }
 
+/**
+ * Basic closure spawner.
+ * @param {Array.<string>} args The arguments to pass to the compiler.
+ */
 function _basicClosureSpawner (args) {
     var jarfile = path.resolve(__dirname + "/../support/compiler.jar")
     var javaArgs = ["-jar", jarfile].concat(args)
