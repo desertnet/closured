@@ -35,14 +35,14 @@ var CompilerProcessMock = module.exports = function () {
 }
 inherits(CompilerProcessMock, EventEmitter)
 
-/** 
+/**
  * Emulate a successful compilation.
  */
 CompilerProcessMock.prototype.emulateSuccess = function () {
     setImmediate(function () {
         this.emit("close")
     }.bind(this))
-    
+
     setImmediate(function () {
         this.emit("exit", 0)
     }.bind(this))

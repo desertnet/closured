@@ -16,8 +16,8 @@
 
 "use strict"
 
-var Compiler = require("../src/Compiler.js")
-  , Job = require("../src/Job.js")
+var Compiler = require("../lib/Compiler.js")
+  , Job = require("../lib/Job.js")
   , CompilerProcessMock = require("./CompilerProcessMock.js")
   , sinon = require("sinon")
   , assert = require("assert")

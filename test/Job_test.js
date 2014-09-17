@@ -16,7 +16,7 @@
 
 "use strict"
 
-var Job = require("../src/Job.js")
+var Job = require("../lib/Job.js")
   , assert = require("assert")
   , path = require("path")
   , sinon = require("sinon")
