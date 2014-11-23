@@ -9,10 +9,10 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha"
   },
-  "homepage": "https://github.com/DesertNet/closured",
+  "homepage": "https://github.com/desertnet/closured",
   "repository": {
     "type": "git",
-    "url": "git://github.com/DesertNet/closured.git"
+    "url": "git://github.com/desertnet/closured.git"
   },
   "keywords": [
     "closure",
@@ -23,7 +23,7 @@
   "author": "Eric McCarthy <eric@limulus.net> (http://www.limulus.net/)",
   "license": "Apache v2",
   "bugs": {
-    "url": "https://github.com/DesertNet/closured/issues"
+    "url": "https://github.com/desertnet/closured/issues"
   },
   "devDependencies": {
     "mocha": "^1.21.4",
